@@ -1,12 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
-</ion-content>
+<div class="clockulator">
+  <div class="display">{{workingValue}}</div>
+  <div class="keypad">
+    <button (click)="buttonClick(7)">7</button><button (click)="buttonClick(8)">8</button><button (click)="buttonClick(9)">9</button><button (click)="buttonClick('C')" class="clear-btn">C</button>
+    <button (click)="buttonClick(4)">4</button><button (click)="buttonClick(5)">5</button><button (click)="buttonClick(6)">6</button><button (click)="buttonClick('-')" class="minus-btn">-</button>
+    <button (click)="buttonClick(1)">1</button><button (click)="buttonClick(2)">2</button><button (click)="buttonClick(3)">3</button><button (click)="buttonClick('+')" class="plus-btn">+</button>
+    <button (click)="buttonClick(0)" class="zero-btn">0</button><button (click)="buttonClick('=')" class="equals-btn">=</button>
+  </div>
+</div>
