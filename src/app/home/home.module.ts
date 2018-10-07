@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TimePipe, RepeatPipe } from '../shared/pipes';
 
 import { HomePage } from './home.page';
 
@@ -18,6 +19,6 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, TimePipe, RepeatPipe]
 })
 export class HomePageModule {}

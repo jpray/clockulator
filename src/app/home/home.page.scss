@@ -11,6 +11,10 @@
   min-height:1em;
 }
 
+.display-total-time {
+  float:left;
+}
+
 .keypad {
   display: grid;
   grid-gap: 10px;
@@ -21,10 +25,18 @@
 
   }
   .clear-btn {
-    background-color:#E1E1E1;
+    background-color:#bdbd7c;
   }
-  .plus-btn, .minus-btn, .equals-btn {
+  .plus-btn, .minus-btn, .equals-btn, .del-btn {
     background-color:#999;
+  }
+
+  .repeat-text {
+    font-size:1.5rem;
+  }
+
+  .error-container {
+    color:red;
   }
 
   button {
@@ -34,6 +46,10 @@
     padding: 20px;
     width:100%;
     height:100%;
+
+    &[disabled="disabled"] {
+      opacity:0.1;
+    }
   }
 }
 
