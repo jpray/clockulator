@@ -12,17 +12,20 @@ export class HomePage {
   workingValue;
   repeatValue;
   currentOperation;
+  repeatOperation;
+  error;
 
   constructor() {
-    this.totalValue = '12:00 AM'
+    this.totalValue = '12:00 PM'
     this.workingValue = '0';
     this.repeatValue = this.workingValue;
     this.currentOperation = '';
+    this.repeatOperation = '';
   }
 
   validate() {
     if (Number(this.workingValue) > 1200) {
-      this.error = 'Oops, this clockulator cannot add more than 12 hours at a time.  Please try a quantity of time less than or equal to 12 hours.';
+      this.error = 'Oops, this clockulator cannot add more than 12 hours at a time.  Please try a quantity of time less than or equal to 12:00.';
     } else {
       this.error = '';
     }
@@ -43,19 +46,25 @@ export class HomePage {
       this.totalValue = add(this.totalValue, value);
     } else if (this.currentOperation === '-') {
       this.totalValue = subtract(this.totalValue, value);
+    } else if (this.repeatOperation === '+') {
+      this.totalValue = add(this.totalValue, value);
     }
 
     if (Number(this.workingValue) && !Number(this.repeatValue)) {
       this.repeatValue = this.workingValue;
+      this.repeatOperation = this.currentOperation;
     }
 
+    this.currentOperation = '';
     this.workingValue = '0';
   }
 
   onPlusClick() {
     this.repeatValue = '0';
+    this.repeatOperation = '';
     this.onEqualsClick();
     this.repeatValue = '0';
+    this.repeatOperation = '';
     this.currentOperation = '+';
   }
 
@@ -90,8 +99,9 @@ export class HomePage {
     } else if (key === 'C') {
       this.workingValue = '0';
       this.repeatValue = this.workingValue;
-      this.totalValue = '12:00 AM';
+      this.totalValue = '12:00 PM';
       this.currentOperation = '';
+      this.repeatOperation = '';
     } else {
       if (this.workingValue.length > 3) {
         return;

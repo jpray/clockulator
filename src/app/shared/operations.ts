@@ -1,7 +1,7 @@
 import { extractUnits, normalizeTimeFromObject } from './utils';
 
 export function add(time1, time2) {
-  const {hours, minutes, ampm} = extractUnits(time1);
+  let {hours, minutes, ampm} = extractUnits(time1);
   const units2 = extractUnits(time2);
   const hours2 = units2.hours;
   const minutes2 = units2.minutes;
@@ -44,7 +44,7 @@ export function add(time1, time2) {
 }
 
 export function subtract(time1, time2) {
-  const {hours, minutes, ampm} = extractUnits(time1);
+  let {hours, minutes, ampm} = extractUnits(time1);
   const units2 = extractUnits(time2);
   const hours2 = units2.hours;
   const minutes2 = units2.minutes;

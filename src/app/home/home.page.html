@@ -3,15 +3,15 @@
     <span class="display-total-time">
       {{totalValue | time}}
     </span>
-    {{workingValue | time: 'noampm'}}
+    {{currentOperation}}{{workingValue | time: 'noampm'}}
   </div>
   <div class="error-container">
     {{error}}
   </div>
   <div class="keypad">
-    <button [attr.disabled]="currentOperation && !error ? null : 'disabled'" (click)="buttonClick(7)">7</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(8)">8</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(9)">9</button><button [attr.disabled]="currentOperation ? null : 'disabled'" (click)="buttonClick('C')" class="clear-btn">C</button>
-    <button [attr.disabled]="currentOperation && !error ? null : 'disabled'" (click)="buttonClick(4)">4</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(5)">5</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(6)">6</button><button [attr.disabled]="currentOperation && workingValue!=='0' ? null : 'disabled'" (click)="onBackButton()" class="del-btn">Backspace</button><!--<button (click)="buttonClick('-')" class="minus-btn">-</button>-->
+    <button [attr.disabled]="currentOperation && !error ? null : 'disabled'" (click)="buttonClick(7)">7</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(8)">8</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(9)">9</button><button [attr.disabled]="(currentOperation || repeatOperation) ? null : 'disabled'" (click)="buttonClick('C')" class="clear-btn">C</button>
+    <button [attr.disabled]="currentOperation && !error ? null : 'disabled'" (click)="buttonClick(4)">4</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(5)">5</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(6)">6</button><button [attr.disabled]="currentOperation && workingValue!=='0' ? null : 'disabled'" (click)="onBackButton()" class="del-btn"><img src="assets/icon/backspace.png" height="40px"></button><!--<button (click)="buttonClick('-')" class="minus-btn">-</button>-->
     <button [attr.disabled]="currentOperation && !error ? null : 'disabled'" (click)="buttonClick(1)">1</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(2)">2</button><button [attr.disabled]="currentOperation && !error  ? null : 'disabled'" (click)="buttonClick(3)">3</button><button [attr.disabled]="!error ? null : 'disabled'" (click)="buttonClick('+')" class="plus-btn">+</button>
-    <button [attr.disabled]="currentOperation && !error ? null : 'disabled'" (click)="buttonClick(0)" class="zero-btn">0</button><button [attr.disabled]="currentOperation && !error ? null : 'disabled'" (click)="buttonClick('=')" class="equals-btn"><span class="repeat-text">{{this.repeatValue | repeat: this.currentOperation}}</span> = </button>
+    <button [attr.disabled]="currentOperation && !error ? null : 'disabled'" (click)="buttonClick(0)" class="zero-btn">0</button><button [attr.disabled]="(currentOperation || repeatOperation) && !error ? null : 'disabled'" (click)="buttonClick('=')" class="equals-btn"><span class="repeat-text">{{this.repeatValue | repeat: this.repeatOperation}}</span> = </button>
   </div>
 </div>

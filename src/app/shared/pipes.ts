@@ -9,7 +9,11 @@ export class TimePipe implements PipeTransform {
     if (modifier === 'noampm') {
       newVal = newVal.replace(' AM','').replace(' PM','');
     }
-    if (newVal.includes('7:09')) {
+    if (newVal === '00:00') {
+      newVal = '';
+    }
+
+    if (newVal.includes('7:09') && modifier !== 'noampm') {
       return newVal + ' (our favorite time!)';
     }
     if (newVal.includes(':54')) {

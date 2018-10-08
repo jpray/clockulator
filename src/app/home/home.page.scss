@@ -1,14 +1,14 @@
 .clockulator {
-  font-size:2em;
-  padding:6px;
+  font-size:1.8em;
+  padding:2px;
 }
 
 
 .display {
-  font-size: 3rem;
+  font-size: 2rem;
   padding:6px;
   text-align:right;
-  min-height:1em;
+  min-height:1.5em;
 }
 
 .display-total-time {
@@ -16,6 +16,7 @@
 }
 
 .keypad {
+  max-width:95%;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 25% 25% 25% 25%;
@@ -59,5 +60,5 @@
 // }
 
 .equals-btn {
-  grid-column: 4;
+  grid-column: 2/5;
 }
