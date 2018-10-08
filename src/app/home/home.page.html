@@ -1,9 +1,12 @@
 <div class="clockulator">
+  <div class="analog-display">
+    <div id="analog-clock" class="dyclock-container"></div>
+  </div>
   <div class="display">
     <span class="display-total-time">
       {{totalValue | time}}
     </span>
-    {{currentOperation}}{{workingValue | time: 'noampm'}}
+    {{currentOperation}} {{workingValue | time: 'noampm'}}
   </div>
   <div class="error-container">
     {{error}}

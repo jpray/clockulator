@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { add, subtract } from '../shared/operations';
+import { extractUnits } from '../shared/utils';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomePage {
   currentOperation;
   repeatOperation;
   error;
+  clock;
 
   constructor() {
     this.totalValue = '12:00 PM'
@@ -21,6 +23,50 @@ export class HomePage {
     this.repeatValue = this.workingValue;
     this.currentOperation = '';
     this.repeatOperation = '';
+  }
+
+  getClockValues() {
+    let test = extractUnits(this.totalValue);
+    return {
+      hour: test.hours,
+      minute: test.minutes,
+      second: 0
+    }
+  }
+
+  ngAfterContentInit() {
+    setTimeout(() => {
+      //@ts-ignore
+      window.dyClock.prototype.getTime = function() {
+        return this.getClockValues();
+      }.bind(this);
+      // @ts-ignore
+      this.clock = new window.dyClock( "#analog-clock", {
+        clock: 'analog',
+        hand: 'hm',
+        image: 'assets/dyclockjs/image/c01.png',
+        radius: 100,
+        analogStyle: {
+               backgroundColor: "#fff",
+               border: "none",
+               handsColor: {
+                   h: "#000",
+                   m: "#000",
+                   s: "transparent"
+               },
+               handsWidth: {
+                   h: 6,
+                   m: 3,
+                   s: 1
+               },
+               roundHands: false,
+               shape: "circle"
+           }
+      } );
+      this.clock.drawAnalogClock();
+      this.clock.runAnalogClock();
+
+    },500)
   }
 
   validate() {
@@ -83,6 +129,9 @@ export class HomePage {
   }
 
   buttonClick(key) {
+    setTimeout(() => {
+      this.clock.runAnalogClock();
+    },0)
     if (key === '-' || key === '+' || key === '=') {
 
       if (!this.validate()) {
