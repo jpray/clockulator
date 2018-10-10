@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Options</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>24 Hour Clock</ion-label>
+    <ion-checkbox [(ngModel)]="use24HourClock"></ion-checkbox>
+  </ion-item>
+
+
+  <button (click)="goBack()" ion-button full>Back to the Clock</button>
+
+</ion-content>

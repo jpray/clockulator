@@ -3,6 +3,24 @@
   padding:2px;
 }
 
+#options {
+  position:absolute;
+  right:12px;
+  top:12px;
+  padding:0;
+  background-color:inherit;
+  height:36px;
+  width:36px;
+}
+#options-icon {
+  width:100%;
+  height:100%;
+}
+
+.error-container {
+  color:red;
+  font-size:1.2rem;
+}
 
 .display {
   font-size: 2rem;
@@ -12,7 +30,7 @@
 }
 
 .display-total-time {
-  margin-left: 26px;
+  margin-left: 12px;
 }
 
 .keypad {
@@ -34,10 +52,6 @@
 
   .repeat-text {
     font-size:1.5rem;
-  }
-
-  .error-container {
-    color:red;
   }
 
   button {

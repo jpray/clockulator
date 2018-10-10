@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { add, subtract } from '../shared/operations';
 import { extractUnits } from '../shared/utils';
+import {Router} from "@angular/router";
+import { Select, Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +18,13 @@ export class HomePage {
   repeatOperation;
   error;
   clock;
+  use24HourClock;
 
-  constructor() {
-    this.totalValue = '12:00 PM'
+  // Also accepts a function like our select method
+//  @Select(state => state.app) app$: Observable<string[]>;
+
+  constructor(private router: Router) {
+    this.totalValue = '12:00 AM'
     this.workingValue = '0';
     this.repeatValue = this.workingValue;
     this.currentOperation = '';
@@ -34,6 +40,15 @@ export class HomePage {
     }
   }
 
+  ngOnInit() {
+    setInterval(()=> {
+      //@ts-ignore
+      window.clockulator = window.clockulator || {};
+      //@ts-ignore
+      this.use24HourClock = window.clockulator.use24HourClock;
+    },100)
+  }
+
   ngAfterContentInit() {
     setTimeout(() => {
       //@ts-ignore
@@ -45,7 +60,7 @@ export class HomePage {
         clock: 'analog',
         hand: 'hm',
         image: 'assets/dyclockjs/image/c01.png',
-        radius: 100,
+        radius: 80,
         analogStyle: {
                backgroundColor: "#fff",
                border: "none",
@@ -78,6 +93,10 @@ export class HomePage {
     return !this.error;
   }
 
+  optionsClick() {
+    window.location.href = '/options';
+  }
+
   onEqualsClick() {
     let value;
     if (Number(this.workingValue)) {
@@ -94,9 +113,12 @@ export class HomePage {
       this.totalValue = subtract(this.totalValue, value);
     } else if (this.repeatOperation === '+') {
       this.totalValue = add(this.totalValue, value);
+    } else if (this.repeatOperation === '-') {
+      this.totalValue = subtract(this.totalValue, value);
     }
 
     if (Number(this.workingValue) && !Number(this.repeatValue)) {
+      debugger;
       this.repeatValue = this.workingValue;
       this.repeatOperation = this.currentOperation;
     }
@@ -116,7 +138,10 @@ export class HomePage {
 
   onMinusClick() {
     this.repeatValue = '0';
+    this.repeatOperation = '';
     this.onEqualsClick();
+    this.repeatValue = '0';
+    this.repeatOperation = '';
     this.currentOperation = '-';
   }
 
@@ -146,11 +171,14 @@ export class HomePage {
         this.onEqualsClick();
       }
     } else if (key === 'C') {
-      this.workingValue = '0';
-      this.repeatValue = this.workingValue;
-      this.totalValue = '12:00 PM';
-      this.currentOperation = '';
-      this.repeatOperation = '';
+        if (!this.currentOperation && !this.repeatOperation) {
+          this.totalValue = '12:00 AM';
+        }
+        this.workingValue = '0';
+        this.repeatValue = this.workingValue;
+        this.currentOperation = '';
+        this.repeatOperation = '';
+        this.error = '';
     } else {
       if (this.workingValue.length > 3) {
         return;
